@@ -12,8 +12,9 @@ func init() {
 }
 func main() {
 	router := gin.Default()
+	router.Static("/testowyfolder", "./testowyfolder") // do zapamiętania
 	router.LoadHTMLGlob("templates/*")
-	router.GET("/", func(c *gin.Context) {
+	router.GET("/index", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.html", gin.H{})
 	})
 	router.GET("/ping", func(c *gin.Context) {
@@ -25,7 +26,7 @@ func main() {
 	router.MaxMultipartMemory = 8 << 20 // 8 MiB
 	router.POST("/", func(c *gin.Context) {
 		// single file
-		file, err := c.FormFile("file")
+		file, err := c.FormFile("image")
 		if err != nil {
 			c.HTML(http.StatusOK, "index.html", gin.H{
 				"error": "Failed to upload image",
@@ -41,7 +42,8 @@ func main() {
 			})
 		}
 		c.HTML(http.StatusOK, "index.html", gin.H{
-			"image": "/" + dst,
+			"image": "/testowyfolder/" + file.Filename,
+			//"title": "COS" + file.Filename,
 		})
 	})
 
