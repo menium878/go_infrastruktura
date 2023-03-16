@@ -2,6 +2,7 @@ package main
 
 import (
 	"net/http"
+	"os"
 
 	"github.com/gin-gonic/gin"
 	"github.com/menium878/go_infrastruktura/initializers"
@@ -33,7 +34,7 @@ func main() {
 			})
 		}
 		//log.Println(file.Filename)
-		dst := "testowyfolder/" + file.Filename
+		dst := os.Getenv("dir") + file.Filename
 		// Upload the file to specific dst.
 		err = c.SaveUploadedFile(file, dst)
 		if err != nil {
@@ -42,7 +43,7 @@ func main() {
 			})
 		}
 		c.HTML(http.StatusOK, "index.html", gin.H{
-			"image": "/testowyfolder/" + file.Filename,
+			"image": "/" + os.Getenv("dir") + file.Filename,
 			//"title": "COS" + file.Filename,
 		})
 	})
