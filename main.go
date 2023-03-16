@@ -14,7 +14,7 @@ func main() {
 	router := gin.Default()
 	router.Static("/testowyfolder", "./testowyfolder") // do zapamiętania
 	router.LoadHTMLGlob("templates/*")
-	router.GET("/index", func(c *gin.Context) {
+	router.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.html", gin.H{})
 	})
 	router.GET("/ping", func(c *gin.Context) {
