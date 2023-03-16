@@ -6,8 +6,12 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/menium878/go_infrastruktura/initializers"
 )
 
+func init() {
+	initializers.LoadEnvVariables()
+}
 func main() {
 	router := gin.Default()
 	router.GET("/ping", func(c *gin.Context) {
@@ -27,5 +31,6 @@ func main() {
 
 		c.String(http.StatusOK, fmt.Sprintf("'%s' uploaded!", file.Filename))
 	})
-	router.Run(":8080")
+
+	router.Run()
 }
