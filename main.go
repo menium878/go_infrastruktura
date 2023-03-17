@@ -3,6 +3,7 @@ package main
 import (
 	"net/http"
 	"os"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/menium878/go_infrastruktura/initializers"
@@ -11,41 +12,55 @@ import (
 func init() {
 	initializers.LoadEnvVariables()
 }
+
 func main() {
 	router := gin.Default()
-	router.Static(os.Getenv("static"), "."+os.Getenv("static")) // do zapamiętania
+	router.Static(os.Getenv("static"), "."+os.Getenv("static"))
 	router.LoadHTMLGlob("templates/*")
+
 	router.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.html", gin.H{})
 	})
+
 	router.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
+		c.JSON(http.StatusOK, gin.H{
 			"message": "pong",
 		})
 	})
-	// Set a lower memory limit for multipart forms (default is 32 MiB)
+
 	router.MaxMultipartMemory = 8 << 20 // 8 MiB
 	router.POST("/", func(c *gin.Context) {
-		// single file
-		file, err := c.FormFile("image")
+		// multiple files
+		form, err := c.MultipartForm()
 		if err != nil {
 			c.HTML(http.StatusOK, "index.html", gin.H{
-				"error": "Failed to upload image",
+				"error": "Failed to upload image(s)",
 			})
+			return
 		}
-		//log.Println(file.Filename)
-		dst := os.Getenv("dir") + file.Filename
-		// Upload the file to specific dst.
-		err = c.SaveUploadedFile(file, dst)
-		if err != nil {
+
+		files := form.File["image"]
+		if len(files) == 0 {
 			c.HTML(http.StatusOK, "index.html", gin.H{
-				"error": "Failed to upload image",
+				"error": "No files uploaded",
+			})
+			return
+		}
+
+		for i, file := range files {
+			dst := os.Getenv("dir") + file.Filename
+			err = c.SaveUploadedFile(file, dst)
+			if err != nil {
+				c.HTML(http.StatusOK, "index.html", gin.H{
+					"error": "Failed to upload image(s)",
+				})
+				return
+			}
+			c.HTML(http.StatusOK, "index.html", gin.H{
+				"image" + strconv.Itoa(i): "/" + os.Getenv("dir") + file.Filename,
 			})
 		}
-		c.HTML(http.StatusOK, "index.html", gin.H{
-			"image": "/" + os.Getenv("dir") + file.Filename,
-			//"title": "COS" + file.Filename,
-		})
+
 	})
 
 	router.Run()
