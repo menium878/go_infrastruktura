@@ -22,3 +22,6 @@ https://github.com/gofiber/recipes
 python machine learning
 Strona z próbkami zdjeć:
 http://mrl.cs.vsb.cz/eyedataset 
+
+
+Retinal OCT Disease Classification on OCT2017 - przeczytać o tym
