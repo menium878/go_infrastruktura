@@ -18,6 +18,8 @@ https://gin-gonic.com/docs/examples/html-rendering/
 
 https://github.com/gofiber/recipes
 
+dodaj context !!!!
+
 
 python machine learning
 Strona z próbkami zdjeć:
