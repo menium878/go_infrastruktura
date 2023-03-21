@@ -9,6 +9,7 @@ import (
 )
 
 func ImageUpload(c *gin.Context) {
+	//popisać timeoutty contexty
 	// multiple files
 	form, err := c.MultipartForm()
 	if err != nil {
