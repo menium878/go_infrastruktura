@@ -11,6 +11,6 @@ Postres
 
 GOLANG -> Chyba że znajdę czas na rusta ale na chwilę obecną napisane będzie w go 
 
-### Czy cload 
+### Czy cloud 
 
 muszę rozpatrzyć możliwość za darmo ale tak to będzie cieżko gdyż to zdjęcia utrzymanie może wykraczać 
