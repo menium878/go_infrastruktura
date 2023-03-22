@@ -7,3 +7,6 @@ Wysłanie maili
 
 Postres
 
+### Wilcza cześć infrastruktury 
+
+GOLANG -> Chyba że znajdę czas na rusta ale na chwilę obecną napisane będzie w go 
