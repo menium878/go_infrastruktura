@@ -25,3 +25,4 @@ muszę rozpatrzyć możliwość za darmo ale tak to będzie cieżko gdyż to zdj
 
 
 **PRZENIESIENIE NA LINUS**
+ARCH + NEOVIM + LAZYGIT
