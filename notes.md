@@ -26,3 +26,27 @@ muszę rozpatrzyć możliwość za darmo ale tak to będzie cieżko gdyż to zdj
 
 **PRZENIESIENIE NA LINUS**
 ARCH + NEOVIM + LAZYGIT
+
+
+
+Python ciekawostka:
+lista = [element for element in range(10) if element%2 == 0] #lista złożona 
+print(lista)
+lista_1 = (element for element in range(100) if element%2 == 0) # generator czyli objekt który potem mogę wywołać oszczędza pamięć 
+
+
+    
+print(sum(lista_1))
+
+lista = {element: 2 for element in range(100) if element%2 == 0} # słownik złożony
+print(lista)
+
+for x,y in lista.items():
+	print(x,y)
+  
+  
+  
+zad=(element for element in range(100,471) if((element%7==0) and (element%5!=0)))
+for i in zad:
+	print(i)
+    
