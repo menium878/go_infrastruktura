@@ -9,7 +9,8 @@ import (
 )
 
 func ImageUpload(c *gin.Context) {
-	//popisać timeoutty contexty
+	// ? dowiedz się jak będzie działało jeśli wrzucisz w cloud i potem zapis tego zdjęcia
+	// !popisać timeoutty contexty
 	// multiple files
 	form, err := c.MultipartForm()
 	if err != nil {
