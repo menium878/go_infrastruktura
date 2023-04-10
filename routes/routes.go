@@ -40,5 +40,6 @@ func ImageUpload(c *gin.Context) {
 			"image" + strconv.Itoa(i): "/" + os.Getenv("dir") + file.Filename,
 		})
 	}
+	// TODO: send to api that we wanna start the program when we get the picture
 
 }

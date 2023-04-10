@@ -30,6 +30,6 @@ func main() {
 	// Dodanie wielu zdjeć kod
 	router.MaxMultipartMemory = 8 << 20 // 8 MiB ogranieczenie
 	router.POST("/", routes.ImageUpload)
-
+	// TODO: zrobienie api które wysyła maila z wynikiem
 	router.Run()
 }
