@@ -47,7 +47,7 @@ func ImageUpload(c *gin.Context) {
 	// TODO: send to api that we wanna start the program when we get the picture
 }
 
-func sendEmailHandler(c *gin.Context) {
+func SendEmailHandler(c *gin.Context) {
 	// Parse the request body
 	var req struct {
 		Recipient string `json:"recipient"`
