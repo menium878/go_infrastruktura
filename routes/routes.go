@@ -1,51 +1,15 @@
 package routes
 
 import (
+	"bytes"
+	"encoding/json"
 	"net/http"
 	"os"
-	"strconv"
+	"os/exec"
 
 	"github.com/gin-gonic/gin"
 	"gopkg.in/gomail.v2"
 )
-
-func ImageUpload(c *gin.Context) {
-	// ? dowiedz się jak będzie działało jeśli wrzucisz w cloud i potem zapis tego zdjęcia
-	// !popisać timeoutty contexty
-	// !Dopisać wywołanie pytanie o maila i podpisz zdjęcie nim potem wyciągniemy sobie z DB mail po nazwie zdjęcia
-	// ?Przemyśleć czy może logowanie i rejestracja wtedy punkt wyżej działa inaczej
-	// multiple files
-	form, err := c.MultipartForm()
-	if err != nil {
-		c.HTML(http.StatusOK, "index.html", gin.H{
-			"error": "Failed to upload image(s)",
-		})
-		return
-	}
-
-	files := form.File["image"]
-	if len(files) == 0 {
-		c.HTML(http.StatusOK, "index.html", gin.H{
-			"error": "No files uploaded",
-		})
-		return
-	}
-
-	for i, file := range files {
-		dst := os.Getenv("dir") + file.Filename
-		err = c.SaveUploadedFile(file, dst)
-		if err != nil {
-			c.HTML(http.StatusOK, "index.html", gin.H{
-				"error": "Failed to upload image(s)",
-			})
-			return
-		}
-		c.HTML(http.StatusOK, "index.html", gin.H{
-			"image" + strconv.Itoa(i): "/" + os.Getenv("dir") + file.Filename,
-		})
-	}
-	// TODO: send to api that we wanna start the program when we get the picture
-}
 
 func SendEmailHandler(c *gin.Context) {
 	// Parse the request body
@@ -75,4 +39,85 @@ func SendEmailHandler(c *gin.Context) {
 	}
 
 	c.String(http.StatusOK, "Email sent successfully")
+}
+func ImageUpload(c *gin.Context) {
+	form, err := c.MultipartForm()
+	if err != nil {
+		c.HTML(http.StatusOK, "index.html", gin.H{
+			"error": "Failed to upload image(s)",
+		})
+		return
+	}
+
+	files := form.File["image"]
+	if len(files) == 0 {
+		c.HTML(http.StatusOK, "index.html", gin.H{
+			"error": "No files uploaded",
+		})
+		return
+	}
+
+	var result string
+	for _, file := range files {
+		dst := os.Getenv("dir") + file.Filename
+		err = c.SaveUploadedFile(file, dst)
+		if err != nil {
+			c.HTML(http.StatusOK, "index.html", gin.H{
+				"error": "Failed to upload image(s)",
+			})
+			return
+		}
+
+		// execute Python script that calls AI model API
+		cmd := exec.Command("python", "ai_script.py", dst)
+		out, err := cmd.Output()
+		if err != nil {
+			c.HTML(http.StatusOK, "index.html", gin.H{
+				"error": "Failed to call AI model",
+			})
+			return
+		}
+
+		// parse JSON response
+		var aiResult struct {
+			Result string `json:"result"`
+		}
+		err = json.Unmarshal(out, &aiResult)
+		if err != nil {
+			c.HTML(http.StatusOK, "index.html", gin.H{
+				"error": "Failed to parse AI model response",
+			})
+			return
+		}
+
+		result = aiResult.Result
+	}
+
+	// send email with result using SendEmailHandler
+	req := struct {
+		Recipient string `json:"recipient"`
+		Text      string `json:"text"`
+	}{
+		Recipient: "recipient@example.com",
+		Text:      result,
+	}
+	jsonReq, err := json.Marshal(req)
+	if err != nil {
+		c.HTML(http.StatusOK, "index.html", gin.H{
+			"error": "Failed to create email request body",
+		})
+		return
+	}
+	resp, err := http.Post("http://127.0.0.1:9000/send-email", "application/json", bytes.NewBuffer(jsonReq))
+	if err != nil {
+		c.HTML(http.StatusOK, "index.html", gin.H{
+			"error": "Failed to send email request",
+		})
+		return
+	}
+	defer resp.Body.Close()
+
+	c.HTML(http.StatusOK, "index.html", gin.H{
+		"result": result,
+	})
 }
