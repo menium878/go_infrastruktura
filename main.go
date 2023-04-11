@@ -29,6 +29,7 @@ func main() {
 			"message": "pong",
 		})
 	})
+	router.GET("/send-email", routes.sendEmailHandler)
 	// Dodanie wielu zdjeć kod
 	router.MaxMultipartMemory = 8 << 20 // 8 MiB ogranieczenie
 	router.POST("/", routes.ImageUpload)
