@@ -6,6 +6,7 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
+	"gopkg.in/gomail.v2"
 )
 
 func ImageUpload(c *gin.Context) {
@@ -44,5 +45,34 @@ func ImageUpload(c *gin.Context) {
 		})
 	}
 	// TODO: send to api that we wanna start the program when we get the picture
+}
 
+func sendEmailHandler(c *gin.Context) {
+	// Parse the request body
+	var req struct {
+		Recipient string `json:"recipient"`
+		Text      string `json:"text"`
+	}
+	if err := c.BindJSON(&req); err != nil {
+		c.String(http.StatusBadRequest, "Invalid request body")
+		return
+	}
+
+	// Set up the email message
+	m := gomail.NewMessage()
+	m.SetHeader("From", "sender@example.com")
+	m.SetHeader("To", req.Recipient)
+	m.SetHeader("Subject", "Test email")
+	m.SetBody("text/plain", req.Text)
+
+	// Set up the SMTP server details
+	d := gomail.NewDialer("smtp.gmail.com", 587, "sender@example.com", "password")
+
+	// Send the email
+	if err := d.DialAndSend(m); err != nil {
+		c.String(http.StatusInternalServerError, "Failed to send email")
+		return
+	}
+
+	c.String(http.StatusOK, "Email sent successfully")
 }
