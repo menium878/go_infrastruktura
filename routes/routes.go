@@ -69,7 +69,7 @@ func ImageUpload(c *gin.Context) {
 		}
 
 		// execute Python script that calls AI model API
-		cmd := exec.Command("python", "ai_script.py", dst)
+		cmd := exec.Command("python", "main.py", dst)
 		out, err := cmd.Output()
 		if err != nil {
 			c.HTML(http.StatusOK, "index.html", gin.H{
@@ -78,19 +78,7 @@ func ImageUpload(c *gin.Context) {
 			return
 		}
 
-		// parse JSON response
-		var aiResult struct {
-			Result string `json:"result"`
-		}
-		err = json.Unmarshal(out, &aiResult)
-		if err != nil {
-			c.HTML(http.StatusOK, "index.html", gin.H{
-				"error": "Failed to parse AI model response",
-			})
-			return
-		}
-
-		result = aiResult.Result
+		result = string(out)
 	}
 
 	// send email with result using SendEmailHandler
@@ -98,7 +86,7 @@ func ImageUpload(c *gin.Context) {
 		Recipient string `json:"recipient"`
 		Text      string `json:"text"`
 	}{
-		Recipient: "recipient@example.com",
+		Recipient: "recipient@example.com", // ! Wyciągnąć z bazy email
 		Text:      result,
 	}
 	jsonReq, err := json.Marshal(req)
@@ -109,7 +97,7 @@ func ImageUpload(c *gin.Context) {
 		return
 	}
 	resp, err := http.Post("http://127.0.0.1:9000/send-email", "application/json", bytes.NewBuffer(jsonReq))
-	if err != nil {
+	if err != nil || resp.StatusCode != http.StatusOK {
 		c.HTML(http.StatusOK, "index.html", gin.H{
 			"error": "Failed to send email request",
 		})
