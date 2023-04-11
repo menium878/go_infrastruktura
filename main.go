@@ -15,6 +15,8 @@ func init() {
 
 func main() {
 	router := gin.Default()
+	router.Use(gin.Logger())   // * Logger
+	router.Use(gin.Recovery()) // * Recovery
 	router.Static(os.Getenv("static"), "."+os.Getenv("static"))
 	router.LoadHTMLGlob("templates/*")
 
