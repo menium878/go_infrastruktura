@@ -16,3 +16,4 @@
 with open("testowyfolder/","r")as file:
     pass
 
+# ! Pamiętać wypisać na stdout
