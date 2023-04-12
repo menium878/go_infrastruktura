@@ -11,3 +11,8 @@
 
 
 # ! https://www.youtube.com/watch?v=jztwpsIzEGc&t=186s 
+
+
+with open("testowyfolder/","r")as file:
+    pass
+
