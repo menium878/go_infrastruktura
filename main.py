@@ -19,3 +19,11 @@ będzie potrzebne jak deploy na cloud
 pip install tenserflow tensorflow-gpu opencv-python matplotlib
 
 '''
+import tensorflow as tf
+import os
+
+cpus=tf.config.experimental.list_physical_devices('CPU')
+print(len(cpus))
+for cpu in cpus:
+    tf.config.experimental.set_memory_growth(cpu,True)
+
