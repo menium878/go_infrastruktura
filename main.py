@@ -13,7 +13,9 @@
 # ! https://www.youtube.com/watch?v=jztwpsIzEGc&t=186s 
 
 
-with open("testowyfolder/","r")as file:
-    pass
 
-# ! Pamiętać wypisać na stdout
+'''
+będzie potrzebne jak deploy na cloud
+pip install tenserflow tensorflow-gpu opencv-python matplotlib
+
+'''
