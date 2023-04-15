@@ -27,3 +27,10 @@ print(len(cpus))
 for cpu in cpus:
     tf.config.experimental.set_memory_growth(cpu,True)
 
+#Usuniemy zdjecie które nie będą z dobrym rozszerzeniem i inne problemy
+import cv2 #Komputer vision
+import imghdr # Sprawdzanie rozszerzenia
+
+data_dir='testowyfolder'
+os.listdir(data_dir)
+image_exts =['jpeg','jpg','bmp','png']
