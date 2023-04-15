@@ -19,7 +19,7 @@ będzie potrzebne jak deploy na cloud
 pip install tenserflow tensorflow-gpu opencv-python matplotlib
 
 '''
-import tensorflow as tf
+'''import tensorflow as tf
 import os
 
 cpus=tf.config.experimental.list_physical_devices('CPU')
@@ -45,4 +45,6 @@ for image_class in os.listdir(data_dir):
                 print('Image not in ext list {}'.format(image_path))
                 os.remove(image_path)
         except Exception as e: 
-            print('Issue with image {}'.format(image_path))
+            print('Issue with image {}'.format(image_path))'''
+
+
