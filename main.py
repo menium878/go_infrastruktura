@@ -47,4 +47,22 @@ for image_class in os.listdir(data_dir):
         except Exception as e: 
             print('Issue with image {}'.format(image_path))'''
 
+import numpy as np
+import pandas as pd
+import os
+import glob
+import matplotlib
+import seaborn as sns
+import matplotlib.pyplot as plt
+from wordcloud import WordCloud, STOPWORDS
 
+print(os.listdir("domodelu/ODIR-5K/ODIR-5K"))
+
+data_df = pd.read_excel(open("domodelu/ODIR-5K/ODIR-5K/data.xlsx", 'rb'), sheet_name='Sheet1')
+
+
+
+data_df.columns = ["id", 'age', "sex", "left_fundus", "right_fundus", "left_diagnosys", "right_diagnosys", "normal",
+                  "diabetes", "glaucoma", "cataract", "amd", "hypertension", "myopia", "other"]
+
+print(data_df)
