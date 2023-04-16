@@ -68,4 +68,6 @@ data_df.columns = ["id", 'age', "sex", "left_fundus", "right_fundus", "left_diag
 print(data_df)
 
 
-# Nauczymy się na przykładzie i potem trzeba będzie zbudować zupełnie inna apkę która użyje modelu 
+# !!! Nauczymy się na przykładzie i potem trzeba będzie zbudować zupełnie inna apkę która użyje modelu 
+
+# !!! Sprawdzić wypisywanie
