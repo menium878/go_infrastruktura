@@ -9,6 +9,7 @@ import (
 	"github.com/menium878/go_infrastruktura/routes"
 )
 
+// !ŁADOWANIOE ZMIENNEJ
 func init() {
 	initializers.LoadEnvVariables()
 }
