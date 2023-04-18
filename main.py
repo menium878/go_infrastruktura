@@ -66,8 +66,7 @@ data_df.columns = ["id", 'age', "sex", "left_fundus", "right_fundus", "left_diag
                   "diabetes", "glaucoma", "cataract", "amd", "hypertension", "myopia", "other"]
 
 print(data_df)
+# !!! To co wyżej to będzie do reprezentacji danych i tylko tyle
 
-
-# !!! Nauczymy się na przykładzie i potem trzeba będzie zbudować zupełnie inna apkę która użyje modelu 
 
 # !!! Sprawdzić wypisywanie
