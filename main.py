@@ -70,7 +70,19 @@ print(data_df)
 
 
 # !!! Sprawdzić wypisywanie
-
+import os, glob, cv2
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+import tensorflow as tf
+from tensorflow.keras.layers import *
+from tensorflow.keras import backend as K
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.utils import get_custom_objects
+import efficientnet.tfkeras as efn
+from tqdm import tqdm
 class Mish(tf.keras.layers.Layer):
     
     def __init__(self, **kwargs):
