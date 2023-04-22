@@ -68,7 +68,7 @@ data_df.columns = ["id", 'age', "sex", "left_fundus", "right_fundus", "left_diag
 print(data_df)
 # !!! To co wyżej to będzie do reprezentacji danych i tylko tyle
 
-
+# nie wiem jak zrobić model 
 # !!! Sprawdzić wypisywanie
 import os, glob, cv2
 import numpy as np
