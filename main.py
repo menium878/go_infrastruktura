@@ -69,6 +69,7 @@ print(data_df)
 # !!! To co wyżej to będzie do reprezentacji danych i tylko tyle
 
 # nie wiem jak zrobić model 
+# przygotuj tylko std out
 # !!! Sprawdzić wypisywanie
 import os, glob, cv2
 import numpy as np
