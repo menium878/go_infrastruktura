@@ -47,4 +47,3 @@ Wearable Technology: Create an embedded system that can be worn as a smartwatch 
 
 Automotive: Develop an embedded system for a car using Rust or C++. The system can include features like advanced driver assistance, infotainment, and telematics.
 
-I hope these ideas help inspire your next embedded programming project!
