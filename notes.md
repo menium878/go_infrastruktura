@@ -15,7 +15,8 @@ GOLANG -> Chyba że znajdę czas na rusta ale na chwilę obecną napisane będzi
 
 muszę rozpatrzyć możliwość za darmo ale tak to będzie cieżko gdyż to zdjęcia utrzymanie może wykraczać 
 
-
+Small Animal Ophthalmology
+The Wills Eye Manual
 
 
 1. https://www.youtube.com/watch?v=tPYj3fFJGjk
@@ -50,3 +51,5 @@ zad=(element for element in range(100,471) if((element%7==0) and (element%5!=0))
 for i in zad:
 	print(i)
     
+
+
