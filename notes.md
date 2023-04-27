@@ -17,7 +17,7 @@ muszę rozpatrzyć możliwość za darmo ale tak to będzie cieżko gdyż to zdj
 
 Ophthalmology Books
 
-Small Animal Ophthalmology
+Small Animal Ophthalmology raczej nie tak przydata pozycja do mojego problemu
 The Wills Eye Manual
 Ophthalmology Because Badass Miracle Worker Isn't an Official Job Title
 Veterinary and comparative ophthalmology
