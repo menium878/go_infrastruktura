@@ -59,4 +59,6 @@ for i in zad:
 
 obsługa z mailem sprawdzić czy gmail działa
 
+jeżeli nie działa znaleźć alternatywe
+
 
