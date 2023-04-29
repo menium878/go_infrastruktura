@@ -59,6 +59,6 @@ for i in zad:
 
 obsługa z mailem sprawdzić czy gmail działa
 
-jeżeli nie działa znaleźć alternatywe
+jeżeli nie działa znaleźć alternatywe wyłączenie usługi na googlu prawdopodobnie nie działa już 
 
 
