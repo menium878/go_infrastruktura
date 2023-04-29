@@ -38,7 +38,7 @@ Python ciekawostka:
 lista = [element for element in range(10) if element%2 == 0] #lista złożona 
 print(lista)
 lista_1 = (element for element in range(100) if element%2 == 0) # generator czyli objekt który potem mogę wywołać oszczędza pamięć 
-
+wykorzystane przy wczyytywaniu z pliku
 
     
 print(sum(lista_1))
@@ -60,5 +60,7 @@ for i in zad:
 obsługa z mailem sprawdzić czy gmail działa
 
 jeżeli nie działa znaleźć alternatywe wyłączenie usługi na googlu prawdopodobnie nie działa już 
+
+
 
 
